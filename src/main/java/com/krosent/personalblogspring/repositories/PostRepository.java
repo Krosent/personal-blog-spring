@@ -7,7 +7,8 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UserRepository extends CrudRepository<User, Long> {
-    @Query("SELECT * FROM usr WHERE id=:authorId")
-    public User getThisPostAuthor(Long authorId);
+public interface PostRepository extends CrudRepository<Post, Long> {
+    @Query("SELECT * FROM post WHERE author_id = :userId")
+    public List<Post> findAllPostsOfTheUser(Long userId);
+
 }
