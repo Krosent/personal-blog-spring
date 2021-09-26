@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS post;
+CREATE TABLE post (id BIGSERIAL PRIMARY KEY, body VARCHAR(4096), details VARCHAR(4096), author_id BIGINT, time_created TIMESTAMP);
+
