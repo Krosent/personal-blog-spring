@@ -14,7 +14,7 @@ public class IndexController {
     }
 
     @RequestMapping("/")
-    public User createOneUser() {
-        return null;
+    public String createOneUser() {
+        return "main-page";
     }
 }
