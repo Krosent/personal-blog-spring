@@ -11,4 +11,7 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     @Query("SELECT * FROM post WHERE author_id = :userId")
     public List<Post> findAllPostsOfTheUser(Long userId);
 
+    @Query("SELECT * FROM post WHERE featured = true LIMIT 1")
+    public Post findFeaturedPost();
+
 }

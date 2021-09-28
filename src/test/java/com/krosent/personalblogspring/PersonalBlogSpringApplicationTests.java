@@ -42,7 +42,7 @@ class PersonalBlogSpringApplicationTests {
         userRepository.save(usr);
 
 
-        Post post = new Post("hehe", "detailed", usr.getId(), new Date());
+        Post post = new Post("some title", "hehe",  usr.getId(), new Date(), "detailed", false);
 
         postRepository.save(post);
 
@@ -55,7 +55,7 @@ class PersonalBlogSpringApplicationTests {
         User usr = new User("krosent2@gmail.com", "Artyom", "Kuznetsov", "1234", 1);
         userRepository.save(usr);
 
-        Post post = new Post("hehe", "detailed", usr.getId(), new Date());
+        Post post = new Post("some title", "hehe", usr.getId(), new Date(), "detailed", false);
         postRepository.save(post);
 
         assert(userRepository.getThisPostAuthor(post.getAuthor_id()) != null);

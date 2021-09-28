@@ -1,0 +1,5 @@
+.post-card-image-height {
+    max-height: 200px;
+    object-fit: none; /* Do not scale the image */
+    object-position: center;
+}
