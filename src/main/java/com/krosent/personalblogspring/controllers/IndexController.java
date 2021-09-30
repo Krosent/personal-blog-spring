@@ -10,8 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -24,21 +26,25 @@ public class IndexController {
     }
 
     @RequestMapping("/")
-    public String createOneUser(ModelMap model) {
+    public String createOneUser(@RequestParam(defaultValue = "0") Integer page,
+                                @RequestParam(defaultValue = "10") Integer pageSize, ModelMap model) {
         // return first page
-        Pageable firstPageWithTenElements = PageRequest.of(0, 10);
-        Page<Post> postsPaged = postRepository.findAll(firstPageWithTenElements);
+        Pageable pageable = PageRequest.of(page, pageSize);
+        Page<Post> pageResult = postRepository.findAll(pageable);
 
-        List<Post> posts = postsPaged.getContent();
         // pagination control
 
-
-        model.addAttribute("posts", posts);
+        model.addAttribute("posts", pageResult.getContent());
         model.addAttribute("featured_post", postRepository.findFeaturedPost());
-        model.addAttribute("has_previous", postsPaged.hasPrevious());
-        model.addAttribute("has_next", postsPaged.hasNext());
-        model.addAttribute("numberOfPages", postsPaged.getTotalPages());
-        // model.addAttribute("current_page", postsPaged.getPa)
+        model.addAttribute("has_previous", pageResult.hasPrevious());
+        model.addAttribute("has_next", pageResult.hasNext());
+        model.addAttribute("number_of_pages", pageResult.getTotalPages());
+        model.addAttribute("current_page", pageable.getPageNumber());
+
+        System.out.println("Has previous: " + pageResult.hasPrevious());
+        System.out.println("Has next: " + pageResult.hasNext());
+        System.out.println("Number Of Pages: " + pageResult.getTotalPages());
+        System.out.println("Current Page: " + pageable.getPageNumber());
         return "main-page";
     }
 }

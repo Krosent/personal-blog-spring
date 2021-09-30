@@ -81,14 +81,20 @@
             <nav aria-label="Pagination">
                 <hr class="my-0"/>
                 <ul class="pagination justify-content-center my-4">
-                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-                    </li>
-                    <li class="page-item active" aria-current="page"><a class="page-link" href="#!">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                    <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">15</a></li>
-                    <li class="page-item"><a class="page-link" href="#!">Older</a></li>
+                    <li class="page-item"><a class="page-link" th:href="@{/(page=${current_page-1})}" tabindex="-1" aria-disabled="false" th:if="${ has_previous }">Newer</a>
+                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true" th:unless="${ has_previous }">Newer</a></li>
+
+
+                    <li class="page-item active" aria-current="page"><a class="page-link" href="#!" th:text="${current_page + 1}">Current Page</a></li>
+<!--                    IMPLEMENT: -->
+<!--                    <li class="page-item"><a class="page-link" href="#!">2</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#!">3</a></li>-->
+<!--                    <li class="page-item disabled"><a class="page-link" href="#!">...</a></li>-->
+<!--                    <li class="page-item"><a class="page-link" href="#!">15</a></li>-->
+
+                    <li class="page-item"><a class="page-link" th:href="@{/(page=${current_page+1})}" tabindex="-1" aria-disabled="false" th:if="${ has_next }">Older</a>
+                    <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true" th:unless="${ has_next }">Older</a></li>
+
                 </ul>
             </nav>
         </div>
